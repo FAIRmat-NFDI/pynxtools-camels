@@ -1,0 +1,28 @@
+{
+  "template": "https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin",
+  "commit": "5f38479d519664f77a5ea3b7790efb31253b7cc9",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "full_name": "Lev Ginzburg",
+      "email": "lev.ginzburg@physik.hu-berlin.de",
+      "github_username": "GinzburgLev",
+      "plugin_name": "pynxtools-automation",
+      "module_name": "pynxtools_automation",
+      "short_description": "Plugin containing NOMAD search app for automation project (NOMAD CAMELS search app for NeXus CAMELS entries)",
+      "version": "0.1.0",
+      "license": "Apache Software License 2.0",
+      "include_schema_package": false,
+      "include_normalizer": false,
+      "include_parser": false,
+      "include_app": true,
+      "include_example_uploads": false,
+      "_copy_without_render": [
+        "*.html"
+      ],
+      "_template": "https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin",
+      "_commit": "5f38479d519664f77a5ea3b7790efb31253b7cc9"
+    }
+  },
+  "directory": null
+}
