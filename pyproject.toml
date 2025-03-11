@@ -26,6 +26,7 @@ maintainers = [
 ]
 license = { file = "LICENSE" }
 dependencies = [
+    "pynxtools>=0.9.0",
     "nomad-lab>=1.3.0",
     "python-magic-bin; sys_platform == 'win32'",
 ]
