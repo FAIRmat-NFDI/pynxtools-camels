@@ -26,18 +26,18 @@ schema = 'pynxtools.nomad.schema.Root'
 
 app_entry_point = AppEntryPoint(
     name='Automation App',
-    description='Simple Generic NeXus app.',
+    description='Simple App for search of automation files.',
     app=App(
         # Label of the App
-        label='Automation CAMELS',
+        label='Automation',
         # Path used in the URL, must be unique
         path='automation',
         # Used to categorize apps in the explore menu
         category='Experiment',
         # Brief description used in the app menu
-        description='A simple search app customized for generic NeXus data.',
+        description='A simple search app customized for experiment automation data.',
         # Longer description that can also use markdown
-        readme='This page allows to search for generic NeXus Experiment Entries. It is similar to the entries search, but with reduced filter set, modified menu on the left and different shown columns. The dashboard directly shows useful interactive statistics about the data',
+        readme='This page allows to search for experiment automation data. It is similar to the entries search, but with reduced filter set, modified menu on the left and different shown columns. The dashboard directly shows useful interactive statistics about the data',
         # # Label of the App
         # label="Simple Scan",
         # # Path used in the URL, must be unique
@@ -87,18 +87,18 @@ app_entry_point = AppEntryPoint(
             Column(
                 title='Sample ID',
                 search_quantity=f'data.ENTRY[*].SAMPLE[*].sample_id__field#{schema}',
-                selected=False,
+                selected=True,
             ),
             Column(
                 title='Definition',
                 search_quantity=f'data.ENTRY[*].definition__field#{schema}',
+                selected=False,
+            ),
+            Column(
+                title='Protocol',
+                search_quantity=f"data.ENTRY[*].NOTE[?name=='protocol'].file_name__field#{schema}#str",
                 selected=True,
             ),
-            # Column(
-            #     title="Protocol",
-            #     search_quantity=f"data.ENTRY[*].NOTE[?name=='protocol'].file_name__field#{schema}#str",
-            #     selected=False,
-            # ),
         ],
         # Dictionary of search filters that are always enabled for queries made
         # within this app. This is especially important to narrow down the
@@ -209,12 +209,6 @@ app_entry_point = AppEntryPoint(
                             options=5,
                         ),
                         MenuItemTerms(
-                            title='User ID / Entry Author',
-                            search_quantity=f'data.ENTRY.userID.name__field#{schema}#str',
-                            width=12,
-                            options=5,
-                        ),
-                        MenuItemTerms(
                             title='Upload Author',
                             search_quantity='authors.name',
                             width=12,
@@ -228,6 +222,36 @@ app_entry_point = AppEntryPoint(
                         ),
                     ],
                 ),
+                Menu(
+                    title='Protocols (NOMAD CAMELS entries only)',
+                    size=MenuSizeEnum.LG,
+                    items=[
+                        MenuItemTerms(
+                            title='Protocol',
+                            search_quantity=f'data.ENTRY.NOTE.file_name__field#{schema}#str',
+                            width=12,
+                            options=12,
+                        ),
+                        MenuItemTerms(
+                            title='CAMELS version',
+                            search_quantity=f'data.ENTRY.PROCESS.program___version#{schema}#str',
+                            width=12,
+                            options=12,
+                        ),
+                    ],
+                ),
+                MenuItemTerms(
+                    title='Show CAMELS files only',
+                    search_quantity=f'data.ENTRY.PROCESS.program__field#{schema}',
+                    width=12,
+                    options={
+                        'NOMAD CAMELS': MenuItemOption(
+                            label='Show NOMAD CAMELS entries only',
+                        ),
+                    },
+                    show_header=False,
+                    show_input=False,
+                ),
                 MenuItemHistogram(
                     title='Start Time',
                     x=f'data.ENTRY.start_time#{schema}',
@@ -238,75 +262,11 @@ app_entry_point = AppEntryPoint(
                     x='upload_create_time',
                     autorange=True,
                 ),
-                Menu(
-                    title='Protocols (NOMAD CAMELS)',
-                    size=MenuSizeEnum.LG,
-                    items=[
-                        MenuItemTerms(
-                            title='CAMELS files',
-                            search_quantity=f'data.ENTRY.PROCESS.program__field#{schema}',
-                            width=12,
-                            options={
-                                'NOMAD CAMELS': MenuItemOption(
-                                    label='NOMAD CAMELS entries only',
-                                ),
-                            },
-                            show_header=False,
-                            show_input=False,
-                        ),
-                        MenuItemTerms(
-                            title='Protocols (only for CAMELS files)',
-                            search_quantity=f'data.ENTRY.NOTE.file_name__field#{schema}#str',
-                            width=12,
-                            options=12,
-                        ),
-                    ],
-                ),
             ],
         ),
         # Controls the default dashboard shown in the search interface
         dashboard={
             'widgets': [
-                {
-                    'type': 'periodic_table',
-                    'scale': 'linear',
-                    'quantity': 'results.material.elements',
-                    'layout': {
-                        'lg': {'minH': 3, 'minW': 3, 'h': 7, 'w': 10, 'y': 0, 'x': 0}
-                    },
-                },
-                # {
-                #     "type": "histogram",
-                #     "show_input": False,
-                #     "autorange": True,
-                #     "nbins": 30,
-                #     "scale": "linear",
-                #     "quantity": f"data.ENTRY.start_time#{schema}",
-                #     "title": "Start Time",
-                #     "layout": {
-                #         "lg": {"minH": 3, "minW": 3, "h": 7, "w": 10, "y": 7, "x": 0}
-                #     },
-                # },
-                {
-                    'type': 'terms',
-                    'show_input': True,
-                    'scale': 'linear',
-                    'quantity': 'entry_type',
-                    'title': 'Entry Type',
-                    'layout': {
-                        'lg': {'minH': 3, 'minW': 3, 'h': 7, 'w': 4, 'y': 0, 'x': 10}
-                    },
-                },
-                {
-                    'type': 'terms',
-                    'show_input': True,
-                    'scale': 'linear',
-                    'quantity': f'data.ENTRY.definition__field#{schema}',
-                    'title': 'NeXus Class',
-                    'layout': {
-                        'lg': {'minH': 3, 'minW': 3, 'h': 7, 'w': 4, 'y': 0, 'x': 14}
-                    },
-                },
                 {
                     'type': 'terms',
                     'show_input': True,
@@ -314,7 +274,11 @@ app_entry_point = AppEntryPoint(
                     'quantity': f'data.ENTRY.USER.name__field#{schema}',
                     'title': 'Author',
                     'layout': {
-                        'lg': {'minH': 3, 'minW': 3, 'h': 7, 'w': 4, 'y': 0, 'x': 18}
+                        'sm': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 0, 'x': 0},
+                        'md': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 0, 'x': 0},
+                        'lg': {'minH': 3, 'minW': 3, 'h': 6, 'w': 6, 'y': 0, 'x': 0},
+                        'xl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 0},
+                        'xxl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 0},
                     },
                 },
                 {
@@ -324,7 +288,39 @@ app_entry_point = AppEntryPoint(
                     'quantity': f'data.ENTRY.SAMPLE.name__field#{schema}',
                     'title': 'Sample',
                     'layout': {
-                        'lg': {'minH': 3, 'minW': 3, 'h': 7, 'w': 4, 'y': 0, 'x': 22}
+                        'sm': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 0, 'x': 6},
+                        'md': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 0, 'x': 6},
+                        'lg': {'minH': 3, 'minW': 3, 'h': 6, 'w': 6, 'y': 0, 'x': 6},
+                        'xl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 5},
+                        'xxl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 5},
+                    },
+                },
+                {
+                    'type': 'terms',
+                    'show_input': True,
+                    'scale': 'linear',
+                    'quantity': f'data.ENTRY.SAMPLE.sample_id__field#{schema}',
+                    'title': 'Sample ID',
+                    'layout': {
+                        'sm': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 5, 'x': 0},
+                        'md': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 0, 'x': 12},
+                        'lg': {'minH': 3, 'minW': 3, 'h': 6, 'w': 6, 'y': 0, 'x': 12},
+                        'xl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 10},
+                        'xxl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 10},
+                    },
+                },
+                {
+                    'type': 'terms',
+                    'show_input': True,
+                    'scale': 'linear',
+                    'quantity': f'data.ENTRY.NOTE.file_name__field#{schema}#str',
+                    'title': 'Protocol',
+                    'layout': {
+                        'sm': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 5, 'x': 6},
+                        'md': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 5, 'x': 0},
+                        'lg': {'minH': 3, 'minW': 3, 'h': 6, 'w': 6, 'y': 0, 'x': 18},
+                        'xl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 15},
+                        'xxl': {'minH': 3, 'minW': 3, 'h': 7, 'w': 5, 'y': 0, 'x': 15},
                     },
                 },
             ]
