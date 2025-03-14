@@ -1,4 +1,4 @@
-# pynxtools-automation
+# pynxtools-camels
 
 Plugin containing NOMAD search app for automation project (NOMAD CAMELS search app for NeXus CAMELS entries)
 
@@ -9,8 +9,8 @@ This `nomad` plugin was generated with `Cookiecutter` along with `@nomad`'s [`co
 
 If you want to develop locally this plugin, clone the project and in the plugin folder, create a virtual environment (you can use Python 3.9, 3.10, or 3.11):
 ```sh
-git clone https://github.com/GinzburgLev/pynxtools-automation.git
-cd pynxtools-automation
+git clone https://github.com/FAIRmat-NFDI/pynxtools-camels.git
+cd pynxtools-camels
 python3.11 -m venv .pyenv
 . .pyenv/bin/activate
 ```
@@ -123,7 +123,7 @@ Read the [NOMAD plugin documentation](https://nomad-lab.eu/prod/v1/staging/docs/
 Modify the text file under `/nomad/default_plugins.txt` and add:
 ```sh
 <other-content-in-default_plugins.txt>
-pynxtools-automation==x.y.z
+pynxtools-camels==x.y.z
 ```
 where `x.y.z` represents the released version of this plugin.
 
@@ -151,7 +151,7 @@ python -m build --sdist
 You can install the package with pip:
 
 ```sh
-pip install dist/pynxtools-automation-0.1.0
+pip install dist/pynxtools-camels-0.1.0
 ```
 
 Read more about python packages, `pyproject.toml`, and how to upload packages to PyPI
