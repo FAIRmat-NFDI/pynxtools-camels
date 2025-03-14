@@ -13,7 +13,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: Apache Software License",
 ]
-name = "pynxtools-automation"
+name = "pynxtools-camels"
 description = "Plugin containing NOMAD search app for automation project (NOMAD CAMELS search app for NeXus CAMELS entries)"
 version = "0.1.0"
 readme = "README.md"
@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/GinzburgLev/pynxtools-automation"
+Repository = "https://github.com/FAIRmat-NFDI/pynxtools-camels"
 
 [project.optional-dependencies]
 dev = ["ruff", "pytest", "structlog"]
@@ -78,7 +78,7 @@ select = [
     "UP",
     # isort
     "I",
-    # pylint 
+    # pylint
     "PL",
 ]
 
@@ -116,7 +116,7 @@ where = ["src"]
 
 
 
-app_entry_point = "pynxtools_automation.apps:app_entry_point"
+app_entry_point = "pynxtools_camels.apps:app_entry_point"
 
 [tool.cruft]
 # Avoid updating workflow files, this leads to permissions issues
