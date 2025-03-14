@@ -38,20 +38,6 @@ app_entry_point = AppEntryPoint(
         description='A simple search app customized for experiment automation data.',
         # Longer description that can also use markdown
         readme='This page allows to search for experiment automation data. It is similar to the entries search, but with reduced filter set, modified menu on the left and different shown columns. The dashboard directly shows useful interactive statistics about the data',
-        # # Label of the App
-        # label="Simple Scan",
-        # # Path used in the URL, must be unique
-        # path="nxsensor_scan",
-        # # Used to categorize apps in the explore menu
-        # category="Experiment",
-        # # Brief description used in the app menu
-        # description="Search simple scan experiments (NXsensor_scan and inheriting classes), including output of NOMAD CAMELS",
-        # # Longer description that can also use markdown
-        # readme="This page allows to search for generic experimental entries corresponding to NXsensor_scan and inheriting from it classes, including output of NOMAD CAMELS. It is similar to the entries search, but with reduced filter set, modified menu on the left and different shown columns. The dashboard directly shows useful interactive statistics about the data",
-        # If you want to use quantities from a custom schema, you need to load
-        # the search quantities from it first here. Note that you can use a glob
-        # syntax to load the entire package, or just a single schema from a
-        # package.
         search_quantities=SearchQuantities(
             include=[f'*#{schema}'],
         ),
