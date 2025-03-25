@@ -62,7 +62,7 @@ app_entry_point = AppEntryPoint(
             ),
             Column(
                 title='Author',
-                search_quantity=f'[data.ENTRY[*].USER[*].name__field, data.ENTRY[*].userID[*].name__field]#{schema}',
+                search_quantity=f'data.ENTRY[*].USER[*].name__field#{schema}',
                 selected=True,
             ),
             Column(
