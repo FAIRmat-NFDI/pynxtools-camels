@@ -72,7 +72,7 @@ app_entry_point = AppEntryPoint(
             ),
             Column(
                 title='Sample ID',
-                search_quantity=f'data.ENTRY[*].SAMPLE[*].sample_id__field#{schema}',
+                search_quantity=f'data.ENTRY[*].SAMPLE[*].identifierNAME__field#{schema}',
                 selected=True,
             ),
             Column(
@@ -153,14 +153,14 @@ app_entry_point = AppEntryPoint(
                     size=MenuSizeEnum.LG,
                     items=[
                         MenuItemTerms(
-                            title='Model',
-                            search_quantity=f'data.ENTRY.INSTRUMENT.name__field#{schema}',
+                            title="Name",
+                            search_quantity=f"data.ENTRY.INSTRUMENT.name__field#{schema}",
                             width=12,
                             options=12,
                         ),
                         MenuItemTerms(
-                            name='Name',
-                            search_quantity=f'data.ENTRY.INSTRUMENT.name#{schema}',
+                            title="Short Name",
+                            search_quantity=f"data.ENTRY.INSTRUMENT.name___short_name#{schema}",
                             width=12,
                             options=12,
                         ),
@@ -171,14 +171,14 @@ app_entry_point = AppEntryPoint(
                     size=MenuSizeEnum.LG,
                     items=[
                         MenuItemTerms(
-                            title='Name',
-                            search_quantity=f'data.ENTRY.SAMPLE.name__field#{schema}',
+                            title="Name",
+                            search_quantity=f"data.ENTRY.SAMPLE.name__field#{schema}",
                             width=12,
                             options=12,
                         ),
                         MenuItemTerms(
-                            title='Sample ID',
-                            search_quantity=f'data.ENTRY.SAMPLE.sample_id__field#{schema}',
+                            title="Sample ID",
+                            search_quantity=f"data.ENTRY.SAMPLE.identifierNAME__field#{schema}",
                             width=12,
                             options=12,
                         ),
@@ -240,7 +240,7 @@ app_entry_point = AppEntryPoint(
                 ),
                 MenuItemHistogram(
                     title='Start Time',
-                    x=f'data.ENTRY.start_time#{schema}',
+                    x=f'data.ENTRY.start_time__field#{schema}',
                     autorange=True,
                 ),
                 MenuItemHistogram(
@@ -285,7 +285,7 @@ app_entry_point = AppEntryPoint(
                     'type': 'terms',
                     'show_input': True,
                     'scale': 'linear',
-                    'quantity': f'data.ENTRY.SAMPLE.sample_id__field#{schema}',
+                    'quantity': f'data.ENTRY.SAMPLE.identifierNAME__field#{schema}',
                     'title': 'Sample ID',
                     'layout': {
                         'sm': {'minH': 3, 'minW': 3, 'h': 5, 'w': 6, 'y': 5, 'x': 0},
