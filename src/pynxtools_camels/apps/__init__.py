@@ -238,12 +238,17 @@ app_entry_point = AppEntryPoint(
                     show_input=False,
                 ),
                 MenuItemHistogram(
+                    title='File Created',
+                    x=f'data.___file_time#{schema}',
+                    autorange=True,
+                ),
+                MenuItemHistogram(
                     title='Start Time',
                     x=f'data.ENTRY.start_time__field#{schema}',
                     autorange=True,
                 ),
                 MenuItemHistogram(
-                    title='Upload Creation Time',
+                    title='Upload Created',
                     x='upload_create_time',
                     autorange=True,
                 ),
