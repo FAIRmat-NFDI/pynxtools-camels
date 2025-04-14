@@ -50,9 +50,8 @@ app_entry_point = AppEntryPoint(
                 selected=True,
             ),
             Column(
-                title='Start Time',
-                # search_quantity=f"min_by(data.ENTRY, &start_time#{schema}).start_time#{schema}",
-                search_quantity=f'data.ENTRY[*].start_time#{schema}',
+                title='File Created',
+                search_quantity = f'data.___file_time#{schema}',
                 selected=True,
             ),
             Column(
