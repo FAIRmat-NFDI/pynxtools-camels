@@ -50,8 +50,8 @@ app_entry_point = AppEntryPoint(
                 selected=True,
             ),
             Column(
-                title='File Created',
-                search_quantity = f'data.___file_time#{schema}',
+                title='Start Time',
+                search_quantity = f'data.datetime#{schema}',
                 selected=True,
             ),
             Column(
@@ -237,14 +237,14 @@ app_entry_point = AppEntryPoint(
                     show_header=False,
                     show_input=False,
                 ),
-                MenuItemHistogram(
-                    title='File Created',
-                    x=f'data.___file_time#{schema}',
-                    autorange=True,
-                ),
+                # MenuItemHistogram(
+                #     title='File Created',
+                #     x=f'data.___file_time#{schema}',
+                #     autorange=True,
+                # ),
                 MenuItemHistogram(
                     title='Start Time',
-                    x=f'data.ENTRY.start_time__field#{schema}',
+                    x=f'data.datetime#{schema}',
                     autorange=True,
                 ),
                 MenuItemHistogram(
